@@ -1,20 +1,37 @@
-#turns off button  
+#build image url
+urlArray = $("#current_page").attr "src"
+    .split('/')
+imgType = urlArray.pop().replace /[0-9]/g, ''
+url = ""
+url += text + "/" for text in urlArray
+
+#variable to save removed original page
+originalPage = ""
+
+#turns off button
 allPagesOffMode = ->
+    $( originalPage ).insertBefore( "#goToTop" )
     $ "#allPages"
         .html "All Pages Off"
     $ "#goToTop"
         .remove()
+    do elem.remove for elem in $ "[name='all_page']"
+    
 
 #turns on buttons         
 allPagesOnMode = ->
+    originalPage = $("#current_page")[0]
+    $ "#current_page"
+        .remove()
     $ "#allPages"
         .html "All Pages On"
     $ "#content"
-        .append '<button class="btn btn-default" style="position:fixed;bottom:5%;right:5%;" id="goToTop">Go To Top</button>'
+        .append '<button class="btn btn-default" style="position:fixed;bottom:5%;right:5%;z-index:99;" id="goToTop">Go To Top</button>'
     $ "#goToTop"
         .on "click", ->
             window
                 .scrollTo 0, 0
+    $( '<img name="all_page" id="all_page_' + i + '" class="edit reader" src="' + url + i + imgType + '" alt="image" data-page="'+i+'">' ).insertBefore( "#goToTop" ) for i in [1...$("#jump_page").children().length + 1]
 
 #checks to see button settings
 setButton = ->
@@ -41,5 +58,3 @@ $ "#allPages"
     .on "click", ->
         localStorage.setItem "allPagesMode", localStorage.getItem("allPagesMode") is 'false'
         do setButton
-        
-        
