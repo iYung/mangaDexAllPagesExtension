@@ -2,11 +2,19 @@
 allPagesOffMode = ->
     $ "#allPages"
         .html "All Pages Off"
+    $ "#goToTop"
+        .remove()
 
-#turns on button         
+#turns on buttons         
 allPagesOnMode = ->
     $ "#allPages"
         .html "All Pages On"
+    $ "#content"
+        .append '<button class="btn btn-default" style="position:fixed;bottom:5%;right:5%;" id="goToTop">Go To Top</button>'
+    $ "#goToTop"
+        .on "click", ->
+            window
+                .scrollTo 0, 0
 
 #checks to see button settings
 setButton = ->
@@ -21,8 +29,8 @@ $ "#jump_group"
         .attr 'class', 'col-sm-2'
 #adds the button
 $ "#jump_page"
-        .parents "[class='row']"
-            .append '<div id="allPagesDiv" class="col-sm-1"><button class="btn btn-default" id="allPages">All Pages</button></div>'
+    .parents "[class='row']"
+        .append '<div id="allPagesDiv" class="col-sm-1"><button class="btn btn-default" id="allPages">All Pages</button></div>'
 
 #checks previous state of extension
 if localStorage.getItem("allPagesMode") is null then localStorage.setItem "allPagesMode", false
