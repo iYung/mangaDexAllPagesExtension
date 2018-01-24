@@ -13,11 +13,14 @@ setButton = ->
     if localStorage.getItem("allPagesMode") is 'true' then do allPagesOnMode else do allPagesOffMode
     
 #makes room for a "All Pages" toggle button
-$ "[name='jump_page']"
+$ "#jump_page"
+    .parents "[class='col-sm-3']"
+        .attr 'class', 'col-sm-2'
+$ "#jump_group"
     .parents "[class='col-sm-3']"
         .attr 'class', 'col-sm-2'
 #adds the button
-$ "[name='jump_page']"
+$ "#jump_page"
         .parents "[class='row']"
             .append '<div id="allPagesDiv" class="col-sm-1"><button class="btn btn-default" id="allPages">All Pages</button></div>'
 
