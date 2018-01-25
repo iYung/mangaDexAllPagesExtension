@@ -33,7 +33,10 @@ allPagesOnMode = ->
         .on "click", ->
             window
                 .scrollTo 0, 0
-    $( '<img name="all_page" id="all_page_' + i + '" class="edit reader" src="' + url + i + imgType + '" alt="image" data-page="'+i+'">' ).insertBefore( "#goToTop" ) for i in [1...pageTotal + 1]
+    $( '<img name="all_page" id="all_page_' + i + '" class="edit reader" src="' + url + i + imgType + 'e" alt="image" data-page="'+i+'">' ).insertBefore( "#goToTop" ) for i in [1...pageTotal + 1]
+    
+    fixUrl elem, index for elem, index in $ '[name="all_page"]'
+            
     #adds new arrow key functions
     $(document).keydown (evt) ->
         switch evt.keyCode
@@ -49,6 +52,13 @@ allPagesOnMode = ->
 #checks to see button settings
 setButton = ->
     if localStorage.getItem("allPagesMode") is 'true' then do allPagesOnMode else do allPagesOffMode
+    
+fixUrl = (elem, i) -> 
+    newImgType = if imgType is ".png" then ".jpg" else ".png"
+    $(elem).on "error", ->
+        if $(elem).attr("retry") is undefined
+            $(elem).attr "src", url + i + newImgType
+            $(elem).attr "retry", ""
     
 #makes room for a "All Pages" toggle button
 $ "#jump_page"
