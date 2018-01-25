@@ -33,9 +33,9 @@ allPagesOnMode = ->
         .on "click", ->
             window
                 .scrollTo 0, 0
-    $( '<img name="all_page" id="all_page_' + i + '" class="edit reader" src="' + url + i + imgType + 'e" alt="image" data-page="'+i+'">' ).insertBefore( "#goToTop" ) for i in [1...pageTotal + 1]
+    $( '<img name="all_page" id="all_page_' + i + '" class="edit reader" src="' + url + i + imgType + '" alt="image" data-page="'+i+'">' ).insertBefore( "#goToTop" ) for i in [1...pageTotal + 1]
     
-    fixUrl elem, index for elem, index in $ '[name="all_page"]'
+    fixUrl elem, index + 1 for elem, index in $ '[name="all_page"]'
             
     #adds new arrow key functions
     $(document).keydown (evt) ->
