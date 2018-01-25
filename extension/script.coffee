@@ -34,15 +34,17 @@ allPagesOnMode = ->
             window
                 .scrollTo 0, 0
     $( '<img name="all_page" id="all_page_' + i + '" class="edit reader" src="' + url + i + imgType + '" alt="image" data-page="'+i+'">' ).insertBefore( "#goToTop" ) for i in [1...pageTotal + 1]
+    #adds new arrow key functions
     $(document).keydown (evt) ->
         switch evt.keyCode
             when 39 then $("#all_page_" + pageTotal ).attr "id", "current_page"
             when 37 then $("#all_page_1").attr "id", "current_page"
+    #swap event order when arrow keys are pressed
+    ##USES UNRELIABLE JQUERY FUNCTIONS
     events = $._data($(document)[0], "events")["keydown"]
-    temp = events[4]
-    events[4] = events[3]
-    events[3] = temp
-    console.log $._data $(document)[0], "events"
+    temp = events[events.length - 1]
+    events[events.length - 1] = events[events.length - 2]
+    events[events.length - 2] = temp
 
 #checks to see button settings
 setButton = ->
