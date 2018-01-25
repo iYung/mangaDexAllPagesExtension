@@ -1,4 +1,3 @@
 extension/script.js
-extension/jquery-3.2.1.slim.min.js
-setup.js
+inject.js
 node_modules
