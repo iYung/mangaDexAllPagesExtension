@@ -8,6 +8,9 @@ url += text + "/" for text in urlArray
 #variable to save removed original page
 originalPage = ""
 
+#save page count
+pageTotal = $("#jump_page").children().length
+
 #turns off button
 allPagesOffMode = ->
     $( originalPage ).insertBefore( "#goToTop" )
@@ -16,7 +19,6 @@ allPagesOffMode = ->
     $ "#goToTop"
         .remove()
     do elem.remove for elem in $ "[name='all_page']"
-    
 
 #turns on buttons         
 allPagesOnMode = ->
@@ -31,7 +33,16 @@ allPagesOnMode = ->
         .on "click", ->
             window
                 .scrollTo 0, 0
-    $( '<img name="all_page" id="all_page_' + i + '" class="edit reader" src="' + url + i + imgType + '" alt="image" data-page="'+i+'">' ).insertBefore( "#goToTop" ) for i in [1...$("#jump_page").children().length + 1]
+    $( '<img name="all_page" id="all_page_' + i + '" class="edit reader" src="' + url + i + imgType + '" alt="image" data-page="'+i+'">' ).insertBefore( "#goToTop" ) for i in [1...pageTotal + 1]
+    $(document).keydown (evt) ->
+        switch evt.keyCode
+            when 39 then $("#all_page_" + pageTotal ).attr "id", "current_page"
+            when 37 then $("#all_page_1").attr "id", "current_page"
+    events = $._data($(document)[0], "events")["keydown"]
+    temp = events[4]
+    events[4] = events[3]
+    events[3] = temp
+    console.log $._data $(document)[0], "events"
 
 #checks to see button settings
 setButton = ->
