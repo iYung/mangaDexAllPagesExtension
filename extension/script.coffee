@@ -1,6 +1,6 @@
 #build image url
 urlArray = $("#current_page").attr "src"
-    .split('/')
+    .split '/'
 imgType = urlArray.pop().replace /[0-9]/g, ''
 url = ""
 url += text + "/" for text in urlArray
@@ -14,26 +14,16 @@ pageTotal = $("#jump_page").children().length
 #removes effects of all page mode
 allPagesOffMode = ->
     
-    #readd the previous page
-    $( originalPage ).insertBefore( "#bottomBar" )
-    
-    #changes on/off button to off
-    $ "#allPages"
-        .html "All Pages Off"
-        
-    #remove the bottom bar
-    $ "#bottomBar"
-        .remove()
-        
-    #removes all the pages
-    do elem.remove for elem in $ "[name='all_page']"
-    
+    #refreshes window to start of chapter
+    newUrlArray = window.location.href.split '/'
+    do newUrlArray.pop
+    newUrl = ""
+    newUrl += text + "/" for text in newUrlArray
+    window.location.replace newUrl+"1"
+
 #setting up all page mode
 allPagesOnMode = ->
-    
-    #saves original image
-    originalPage = $("#current_page")[0]
-    
+
     #removes original image
     $ "#current_page"
         .remove()
@@ -58,7 +48,7 @@ allPagesOnMode = ->
         .on "click", ->
             events = $._data($(document)[0], "events")["keydown"]
             newKeypressIndex = index for event, index in events when String(event.handler).includes "#all_page_"
-            oldKeypressIndex = index for event, index in events when String(event.handler).includes "evt.target.tagName === 'BODY'"
+            oldKeypressIndex = index for event, index in events when String(event.handler).includes "evt.target"
             events[newKeypressIndex].handler {keyCode: 39}
             events[oldKeypressIndex].handler {keyCode: 39, target: {tagName: 'BODY'}}
             
@@ -68,7 +58,7 @@ allPagesOnMode = ->
         .on "click", ->
             events = $._data($(document)[0], "events")["keydown"]
             newKeypressIndex = index for event, index in events when String(event.handler).includes "#all_page_"
-            oldKeypressIndex = index for event, index in events when String(event.handler).includes "evt.target.tagName === 'BODY'"
+            oldKeypressIndex = index for event, index in events when String(event.handler).includes "evt.target"
             events[newKeypressIndex].handler {keyCode: 37}
             events[oldKeypressIndex].handler {keyCode: 37, target: {tagName: 'BODY'}}
 
@@ -76,7 +66,7 @@ allPagesOnMode = ->
     $( '<img name="all_page" id="all_page_' + i + '" class="edit reader" src="' + url + i + imgType + '" alt="image" data-page="'+i+'">' ).insertBefore( "#bottomBar" ) for i in [1...pageTotal + 1]
     fixUrl elem, index + 1 for elem, index in $ '[name="all_page"]'
             
-    #adds new arrow key functions
+    #adds new arrow key functions which makes them jump by chapters instead of pages
     $(document).keydown (evt) ->
         switch evt.keyCode
             when 39 then $("#all_page_" + pageTotal ).attr "id", "current_page"
@@ -86,7 +76,9 @@ allPagesOnMode = ->
     ##USES UNRELIABLE JQUERY FUNCTIONS
     events = $._data($(document)[0], "events")["keydown"]
     newKeypressIndex = index for event, index in events when String(event.handler).includes "#all_page_"
-    oldKeypressIndex = index for event, index in events when String(event.handler).includes "evt.target.tagName === 'BODY'"
+    console.log newKeypressIndex
+    oldKeypressIndex = index for event, index in events when String(event.handler).includes "evt.target"
+    console.log oldKeypressIndex
     temp = events[newKeypressIndex]
     events[newKeypressIndex] = events[oldKeypressIndex]
     events[oldKeypressIndex] = temp
@@ -113,11 +105,11 @@ $ "#jump_group"
 #adds the on/off button
 $ "#jump_page"
     .parents "[class='row']"
-        .append '<div id="allPagesDiv" class="col-sm-1"><button class="btn btn-default" id="allPages">All Pages</button></div>'
+        .append '<div id="allPagesDiv" class="col-sm-1"><button class="btn btn-default" id="allPages">All Pages Off</button></div>'
 
 #checks previous state of extension
 if localStorage.getItem("allPagesMode") is null then localStorage.setItem "allPagesMode", false
-do setButton
+do setButton if localStorage.getItem("allPagesMode") is 'true'
 
 #adds button toggle functionality
 $ "#allPages"
