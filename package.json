@@ -5,7 +5,7 @@
   "main": "setup.js",
   "scripts": {
     "compile": "coffee -c -b ./",
-    "setup": "npm install && coffee -c -b ./ && node setup.js"
+    "setup": "npm install && coffee -c -b ./"
   },
   "repository": {
     "type": "git",
