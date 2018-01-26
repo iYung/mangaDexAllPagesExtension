@@ -7,8 +7,7 @@
   {
     "48": "icons/48.png",
     "128": "icons/128.png" 
-  },
-  "default_locale": "en",
+  }, 
   "description": "Add a long strip reading mode to MangaDex",
   "content_scripts": [
   {
