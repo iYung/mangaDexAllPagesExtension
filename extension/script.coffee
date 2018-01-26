@@ -31,11 +31,15 @@ allPagesOnMode = ->
     #changes on/off button to on
     $ "#allPages"
         .html "All Pages On"
+    
+    #disables page dropdown
+    $ "#jump_page"
+        .attr 'disabled', ''
         
     #creates bottom bar
     $ "#content"
-        .append '<div style="position:fixed;bottom:5%;right:5%;z-index:99;" id="bottomBar"><button class="btn btn-default" id="goPrev"><-</button><button class="btn btn-default" id="goToTop">Go To Top</button><button class="btn btn-default" id="goNext">-></button></div>'
-    
+        .append '<div style="position:fixed;bottom:3%;right:2%;z-index:99;" id="bottomBar"><button class="btn btn-default" id="goPrev"><-</button><button class="btn btn-default" id="goToTop">Go To Top</button><button class="btn btn-default" id="goNext">-></button></div>'
+        
     #makes page go to the top
     $ "#goToTop"
         .on "click", ->
