@@ -30,7 +30,7 @@ allPagesOnMode = ->
     
     #changes on/off button to on
     $ "#allPages"
-        .html "All Pages On"
+        .html "Long Strip On"
     
     #disables page dropdown
     $ "#jump_page"
@@ -99,7 +99,7 @@ fixUrl = (elem, i) ->
             $(elem).attr "src", url + i + newImgType
             $(elem).attr "retry", ""
     
-#makes room for a "All Pages" toggle button
+#makes room for a "Long Strip" toggle button
 $ "#jump_page"
     .parents "[class='col-sm-3']"
         .attr 'class', 'col-sm-2'
@@ -109,7 +109,7 @@ $ "#jump_group"
 #adds the on/off button
 $ "#jump_page"
     .parents "[class='row']"
-        .append '<div id="allPagesDiv" class="col-sm-1"><button class="btn btn-default" id="allPages">All Pages Off</button></div>'
+        .append '<div id="allPagesDiv" class="col-sm-1"><button class="btn btn-default" id="allPages">Long Strip Off</button></div>'
 
 #checks previous state of extension
 if localStorage.getItem("allPagesMode") is null then localStorage.setItem "allPagesMode", false
