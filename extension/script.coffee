@@ -5,6 +5,8 @@ $ document
         urlArray = $("#current_page").attr "src"
             .split '/'
         imgType = urlArray.pop().replace /[0-9]/g, ''
+        imgPrefix = imgType.slice 0, imgType.indexOf "."
+        imgType = imgType.slice imgType.indexOf "."
         url = ""
         url += text + "/" for text in urlArray
         
@@ -67,7 +69,7 @@ $ document
                     events[oldKeypressIndex].handler {keyCode: 37, target: {tagName: 'BODY'}}
         
             #adds images with a function which helps deal with chapteres with both jpg and png
-            $( '<img name="all_page" id="all_page_' + i + '" class="edit reader" src="' + url + i + imgType + '" alt="image" data-page="'+i+'">' ).insertBefore( "#bottomBar" ) for i in [1...pageTotal + 1]
+            $( '<img name="all_page" id="all_page_' + i + '" class="edit reader" src="' + url + imgPrefix + i + imgType + '" alt="image" data-page="'+i+'">' ).insertBefore( "#bottomBar" ) for i in [1...pageTotal + 1]
             fixUrl elem, index + 1 for elem, index in $ '[name="all_page"]'
                     
             #adds new arrow key functions which makes them jump by chapters instead of pages
@@ -94,7 +96,7 @@ $ document
             newImgType = if imgType is ".png" then ".jpg" else ".png"
             $(elem).on "error", ->
                 if $(elem).attr("retry") is undefined
-                    $(elem).attr "src", url + i + newImgType
+                    $(elem).attr "src", url + imgPrefix + i + newImgType
                     $(elem).attr "retry", ""
             
         #makes room for a "Long Strip" toggle button
