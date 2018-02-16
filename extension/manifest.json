@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Long Strip for MangaDex",
-  "version": "0.0.0.3",
+  "version": "0.0.0.5",
   "web_accessible_resources" : ["script.js"],
   "icons": 
   {
