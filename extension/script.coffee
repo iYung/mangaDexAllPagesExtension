@@ -40,7 +40,7 @@ $ document
                 
             #creates bottom bar
             $ "#content"
-                .append '<div style="position:fixed;bottom:3%;right:2%;z-index:99;" id="bottomBar"><button class="btn btn-default" id="goPrev"><-</button><button class="btn btn-default" id="goToTop">Go To Top</button><button class="btn btn-default" id="goNext">-></button></div>'
+                .append '<div style="position:fixed;bottom:2%;right:2%;z-index:99;" id="bottomBar"><button class="btn btn-default" style="border:0;background: rgba(255, 255, 255, 0.5);" id="goPrev">&lt;-</button><button class="btn btn-default" style="border:0;background: rgba(255, 255, 255, 0.5);" id="goToTop">Top</button><button class="btn btn-default" style="border:0;background: rgba(255, 255, 255, 0.5);" id="goNext">-&gt;</button></div>'
                 
             #makes page go to the top
             $ "#goToTop"
@@ -101,15 +101,15 @@ $ document
             
         #makes room for a "Long Strip" toggle button
         $ "#jump_page"
-            .parents "[class='col-sm-3']"
-                .attr 'class', 'col-sm-2'
-        $ "#jump_group"
-            .parents "[class='col-sm-3']"
-                .attr 'class', 'col-sm-2'
+            .parents "[class='toggle col-sm-2']"
+                .attr 'class', 'toggle col-sm-1'
+        $ "#minimise"
+            .parents "[class='col-sm-2 text-right']"
+                .attr 'class', 'col-sm-1 text-right'
         #adds the on/off button
         $ "#jump_page"
             .parents "[class='row']"
-                .append '<div id="allPagesDiv" class="col-sm-1"><button class="btn btn-default" id="allPages">Long Strip Off</button></div>'
+                .append '<div id="allPagesDiv" class="col-sm-1 toggle"><button class="btn btn-default" id="allPages">Long Strip Off</button></div>'
         
         #checks previous state of extension
         if localStorage.getItem("allPagesMode") is null then localStorage.setItem "allPagesMode", false
