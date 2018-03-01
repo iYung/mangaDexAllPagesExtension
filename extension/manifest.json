@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Long Strip for MangaDex",
-  "version": "0.0.0.5",
+  "version": "0.0.0.6",
   "web_accessible_resources" : ["script.js"],
   "icons": 
   {
@@ -12,7 +12,7 @@
   "content_scripts": [
   {
     "matches": [
-      "https://mangadex.com/chapter/*"
+      "https://mangadex.org/chapter/*"
     ],
     "js": ["inject.js"]
   }]
