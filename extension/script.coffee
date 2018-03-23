@@ -56,7 +56,7 @@ $ document
                     newKeypressIndex = index for event, index in events when String(event.handler).includes "#all_page_"
                     oldKeypressIndex = index for event, index in events when String(event.handler).includes "evt.target"
                     events[newKeypressIndex].handler {keyCode: 39}
-                    events[oldKeypressIndex].handler {keyCode: 39, target: {tagName: 'BODY'}}
+                    events[oldKeypressIndex].handler {keyCode: 39, target: {tagName: 'BODY'}, key: "d"}
                     
             #runs keydown handlers to go to the prev chapter         
             ##USES UNRELIABLE JQUERY FUNCTIONS
@@ -66,7 +66,7 @@ $ document
                     newKeypressIndex = index for event, index in events when String(event.handler).includes "#all_page_"
                     oldKeypressIndex = index for event, index in events when String(event.handler).includes "evt.target"
                     events[newKeypressIndex].handler {keyCode: 37}
-                    events[oldKeypressIndex].handler {keyCode: 37, target: {tagName: 'BODY'}}
+                    events[oldKeypressIndex].handler {keyCode: 37, target: {tagName: 'BODY'}, key: "a"}
         
             #adds images with a function which helps deal with chapteres with both jpg and png
             $( '<img name="all_page" id="all_page_' + i + '" class="edit reader" src="' + url + imgPrefix + i + imgType + '" alt="image" data-page="'+i+'">' ).insertBefore( "#bottomBar" ) for i in [1...pageTotal + 1]
