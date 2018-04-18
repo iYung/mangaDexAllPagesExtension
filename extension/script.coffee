@@ -69,7 +69,7 @@ $ document
                     events[oldKeypressIndex].handler {keyCode: 37, target: {tagName: 'BODY'}, key: "a"}
         
             #adds images with a function which helps deal with chapteres with both jpg and png
-            $( '.images' ).append '<img name="all_page" id="all_page_' + i + '" class="edit reader" src="' + url + imgPrefix + i + imgType + '" alt="image" data-page="'+i+'">' for i in [1...pageTotal + 1]
+            $( '.images' ).append '<img name="all_page" id="all_page_' + i + '" class="reader max-width" src="' + url + imgPrefix + i + imgType + '" alt="image" data-page="'+i+'">' for i in [1...pageTotal + 1]
             fixUrl elem, index + 1 for elem, index in $ '[name="all_page"]'
                     
             #adds new arrow key functions which makes them jump by chapters instead of pages
@@ -100,16 +100,15 @@ $ document
                     $(elem).attr "retry", ""
             
         #makes room for a "Long Strip" toggle button
-        $ "#jump_page"
-            .parents "[class='toggle col-sm-2']"
-                .attr 'class', 'toggle col-sm-1'
-        $ "#minimise"
-            .parents "[class='col-sm-2 text-right']"
-                .attr 'class', 'col-sm-1 text-right'
+        $ "#jump_group"
+            .parents "[class='col-md-3']"
+                .attr 'class', 'col-md-2'
+        $ "[class='col-md-4 text-center']"
+            .attr 'class', 'col-md-3 text-center'
         #adds the on/off button
         $ "#jump_page"
             .parents "[class='row']"
-                .append '<div id="allPagesDiv" class="col-sm-1 toggle"><button class="btn btn-default" id="allPages">Long Strip Off</button></div>'
+                .append '<div id="allPagesDiv" class="col-md-1"><button class="btn btn-default" id="allPages">Long Strip Off</button></div>'
         
         #checks previous state of extension
         if localStorage.getItem("allPagesMode") is null then localStorage.setItem "allPagesMode", false
